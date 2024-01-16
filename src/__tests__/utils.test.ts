@@ -12,7 +12,7 @@ import {
 } from '../utils'
 
 const originalPlatform = process.platform
-const ACTION_PATH = path.resolve(__dirname, '..', '..', 'action.yml')
+const ACTION_PATH = path.resolve(__dirname, '..', '..')
 
 function mockedPlatform(platform: string): void {
   Object.defineProperty(process, 'platform', {
