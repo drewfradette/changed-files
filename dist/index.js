@@ -2962,7 +2962,10 @@ exports.hasLocalGitDirectory = hasLocalGitDirectory;
  */
 const warnUnsupportedRESTAPIInputs = ({ actionPath, inputs }) => __awaiter(void 0, void 0, void 0, function* () {
     var _m;
-    const actionContents = yield fs_1.promises.readFile(actionPath, 'utf8');
+    const actionFile = path.join(actionPath, 'action.yml');
+    core.debug(`action file: ${actionFile}`);
+    const actionContents = yield fs_1.promises.readFile(actionFile, 'utf8');
+    core.debug(`action contents:\n${actionContents}`);
     const actionYaml = (0, yaml_1.parseDocument)(actionContents, { schema: 'failsafe' });
     if (actionYaml.errors.length > 0) {
         throw new Error(`YAML errors in ${actionPath}: ${actionYaml.errors.join(', ')}`);

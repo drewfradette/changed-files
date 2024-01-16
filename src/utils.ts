@@ -1523,10 +1523,12 @@ export const warnUnsupportedRESTAPIInputs = async ({
   actionPath: string
   inputs: Inputs
 }): Promise<void> => {
-  const actionContents = await fs.readFile(
-    path.join(actionPath, 'action.yml'),
-    'utf8'
-  )
+  const actionFile = path.join(actionPath, 'action.yml')
+  core.debug(`action file: ${actionFile}`)
+
+  const actionContents = await fs.readFile(actionFile, 'utf8')
+  core.debug(`action contents:\n${actionContents}`)
+
   const actionYaml = parseDocument(actionContents, {schema: 'failsafe'})
 
   if (actionYaml.errors.length > 0) {
